@@ -1,1 +1,1 @@
-console.log("Frontend container started successfully");
+console.log("Inside Frontend");
