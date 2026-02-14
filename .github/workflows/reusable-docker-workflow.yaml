@@ -33,7 +33,7 @@ jobs:
           docker build \
             -t ${{ secrets.docker_username }}/${{ inputs.service }}:latest \
             -t ${{ secrets.docker_username }}/${{ inputs.service }}:${{ inputs.tag }} \
-            ./services/${{ inputs.service }}
+            ./app/${{ inputs.service }}
 
     #   - name: Push Docker Image
     #     run: |
