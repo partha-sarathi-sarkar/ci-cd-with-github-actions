@@ -1,9 +1,9 @@
 name: Build Services
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   workflow_dispatch:
 
 jobs:
@@ -41,9 +41,9 @@ jobs:
     uses: ./.github/workflows/reusable-docker-workflow.yaml
     with:
       service: api
-      username: ${{ secrets.DOCKER_USERNAME }}
       tag: ${{ github.sha }}
     secrets:
+      docker_username: ${{ secrets.DOCKER_USERNAME }}
       docker_password: ${{ secrets.DOCKER_PASSWORD }}
 
   # --------------------------------
@@ -55,9 +55,9 @@ jobs:
     uses: ./.github/workflows/reusable-docker-workflow.yaml
     with:
       service: util
-      username: ${{ secrets.DOCKER_USERNAME }}
       tag: ${{ github.sha }}
     secrets:
+      docker_username: ${{ secrets.DOCKER_USERNAME }}
       docker_password: ${{ secrets.DOCKER_PASSWORD }}
 
   # --------------------------------
@@ -69,7 +69,7 @@ jobs:
     uses: ./.github/workflows/reusable-docker-workflow.yaml
     with:
       service: frontend
-      username: ${{ secrets.DOCKER_USERNAME }}
       tag: ${{ github.sha }}
     secrets:
+      docker_username: ${{ secrets.DOCKER_USERNAME }}
       docker_password: ${{ secrets.DOCKER_PASSWORD }}
