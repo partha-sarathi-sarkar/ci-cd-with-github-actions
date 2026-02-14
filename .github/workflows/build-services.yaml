@@ -26,11 +26,11 @@ jobs:
         with:
           filters: |
             api:
-              - 'services/api/**'
+              - 'app/api/**'
             util:
-              - 'services/util/**'
+              - 'app/util/**'
             frontend:
-              - 'services/frontend/**'
+              - 'app/frontend/**'
 
   # --------------------------------
   # Build API (only if changed)
