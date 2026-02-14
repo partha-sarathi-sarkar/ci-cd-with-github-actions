@@ -41,7 +41,7 @@ jobs:
             -t ${{ secrets.docker_username }}/${{ inputs.service }}:${{ inputs.tag }} \
             -t ghcr.io/${{ github.repository_owner }}/${{ inputs.service }}:latest \
             -t ghcr.io/${{ github.repository_owner }}/${{ inputs.service }}:${{ inputs.tag }} \
-            ./services/${{ inputs.service }}
+            ./app/${{ inputs.service }}
 
 
 
