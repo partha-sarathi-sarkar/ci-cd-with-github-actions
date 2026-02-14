@@ -1,0 +1,47 @@
+name: My First Workflow
+
+## Manual Trigger
+on:
+  workflow_dispatch:
+
+# on: push
+
+## Trigger Only Specific Branches
+# on:
+#   push:
+#     branches:
+#       - main
+#       - develop
+
+
+## Use pattern matching
+# branches:
+#   - 'feature/*'
+#   - 'release/**'
+
+##Ignore Specific Branches
+# on:
+#   push:
+#     branches-ignore:
+#      - 'feature/*'
+#      - 'release/**'
+
+
+##Combine Specific branch and path 
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - 'app/**'
+
+
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Hello
+        run: echo "Hello, GitHub Actions!"

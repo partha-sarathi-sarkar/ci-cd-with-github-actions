@@ -1,0 +1,75 @@
+name: Build Services
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  # --------------------------------
+  # Detect Changed Services
+  # --------------------------------
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      api: ${{ steps.filter.outputs.api }}
+      util: ${{ steps.filter.outputs.util }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect changed services
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            api:
+              - 'services/api/**'
+            util:
+              - 'services/util/**'
+            frontend:
+              - 'services/frontend/**'
+
+  # --------------------------------
+  # Build API (only if changed)
+  # --------------------------------
+  build-api:
+    needs: changes
+    if: needs.changes.outputs.api == 'true'
+    uses: ./.github/workflows/reusable-docker-workflow.yaml
+    with:
+      service: api
+      username: ${{ secrets.DOCKER_USERNAME }}
+      tag: ${{ github.sha }}
+    secrets:
+      docker_password: ${{ secrets.DOCKER_PASSWORD }}
+
+  # --------------------------------
+  # Build Util (only if changed)
+  # --------------------------------
+  build-util:
+    needs: changes
+    if: needs.changes.outputs.util == 'true'
+    uses: ./.github/workflows/reusable-docker-workflow.yaml
+    with:
+      service: util
+      username: ${{ secrets.DOCKER_USERNAME }}
+      tag: ${{ github.sha }}
+    secrets:
+      docker_password: ${{ secrets.DOCKER_PASSWORD }}
+
+  # --------------------------------
+  # Build Frontend (only if changed)
+  # --------------------------------
+  build-frontend:
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    uses: ./.github/workflows/reusable-docker-workflow.yaml
+    with:
+      service: frontend
+      username: ${{ secrets.DOCKER_USERNAME }}
+      tag: ${{ github.sha }}
+    secrets:
+      docker_password: ${{ secrets.DOCKER_PASSWORD }}

@@ -1,0 +1,13 @@
+name: "Docker Greeting Action"
+description: "Docker action with Dockerfile in root"
+
+inputs:
+  name:
+    description: "Name"
+    required: true
+
+runs:
+  using: docker
+  image: ../../../Dockerfile
+  args:
+    - ${{ inputs.name }}

@@ -1,0 +1,23 @@
+name: Build All Services
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        service:
+          - api
+          - util
+          - frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build ${{ matrix.service }}
+        uses: ./.github/actions/docker-builder-service
+        with:
+          service: ${{ matrix.service }}

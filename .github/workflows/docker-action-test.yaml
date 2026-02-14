@@ -1,0 +1,15 @@
+name: Test Root Docker Action
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Docker Action
+        uses: ./.github/actions/docker-action
+        with:
+          name: "Partha"

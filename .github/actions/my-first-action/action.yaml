@@ -1,0 +1,13 @@
+name: "Hello World"
+description: "First Action"
+
+inputs:
+  name:
+    description: "Name"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - run: echo "Hello ${{ inputs.name }}"
+      shell: bash

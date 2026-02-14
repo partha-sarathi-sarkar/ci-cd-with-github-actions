@@ -1,0 +1,13 @@
+name: "Reusable Docker Builder"
+description: "Build Docker images for a specific service"
+
+inputs:
+  service:
+    description: "Service name"
+    required: true
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.service }}
